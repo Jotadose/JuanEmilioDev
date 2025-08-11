@@ -5,20 +5,44 @@ import Image from "next/image";
 const Portfolio = () => {
   const projects = [
     {
-      image: "/images/porta02.jpg", // Asegúrate de que la imagen esté en public/images/
-      alt: "Captura de pantalla del Sistema de Gestión Interno",
-      title: "Sistema de Gestión Interno",
+      image: "/images/porta03.jpg",
+      alt: "Sistema SISGEA",
+      title: "SISGEA - Citofonía y Video-Citofonía Inalámbrica",
       description:
-        "Una solución backend para automatizar procesos de inventario y reportes para una empresa local.",
-      tags: ["Python", "Flask", "MySQL", "API REST"],
+        "Sistema integral con backend, UI/UX y documentación técnica para control de acceso inalámbrico en comunidades y empresas, con arquitectura escalable y pruebas de seguridad.",
+      tags: ["Java", "MySQL", "UML", "Arquitectura de Software"],
     },
     {
-      image: "/images/porta03.jpg", // Asegúrate de que la imagen esté en public/images/
-      alt: "Captura de pantalla de la Plataforma Web de Reservas",
-      title: "Punto de Venta",
+      image: "/images/porta01.jpg",
+      alt: "Palelo SPA App",
+      title: "Palelo SPA App",
       description:
-        "Aplicación full-stack que permite a los usuarios registrar ventas y gestionar productos de manera intuitiva.",
-      tags: ["Node.js", "JavaScript", "Astro", "HTML/CSS"],
+        "Aplicación para gestión de inventario y ventas en eventos VIP, optimizada para flujo rápido y control en tiempo real, usada en Estadio La Portada.",
+      tags: ["JavaScript", "React", "Node.js", "MySQL"],
+    },
+    {
+      image: "/images/porta03.jpg",
+      alt: "RC Reformas Web",
+      title: "RC Reformas & Mantenciones",
+      description:
+        "Sitio web corporativo optimizado para SEO y conversión de clientes, con integración de redes sociales y diseño responsivo.",
+      tags: ["Next.js", "Tailwind CSS", "Vercel", "SEO"],
+    },
+    {
+      image: "/images/porta02.jpg",
+      alt: "Rediseño web Club Depoortivo",
+      title: "Rediseño Club Deportivo",
+      description:
+        "Propuesta integral de rediseño web con mejoras técnicas, optimización de carga y actualización estética para aumentar la interacción con hinchas y patrocinadores.",
+      tags: ["Astro", "Tailwind CSS", "Optimización SEO", "UI/UX"],
+    },
+    {
+      image: "/images/porta01.jpg",
+      alt: "AstroAuthLucia",
+      title: "AstroAuthLucia",
+      description:
+        "Sistema de autenticación en Astro con Lucia Auth, diseñado para proyectos escalables y con control avanzado de roles y sesiones.",
+      tags: ["Astro", "Lucia Auth", "TypeScript", "Tailwind CSS"],
     },
   ];
 
@@ -41,7 +65,6 @@ const Portfolio = () => {
               key={index}
               className="card-bg rounded-xl overflow-hidden group border border-gray-800"
             >
-              {/* Contenedor con proporción fija (16:9) */}
               <div className="relative w-full aspect-video overflow-hidden">
                 <Image
                   src={project.image}
