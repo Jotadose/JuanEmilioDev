@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0F172A;
+  --foreground: #E2E8F0;
+  --card-bg: #1E293B;
+  --border: #334155;
+  --primary: #6366F1;
+  --accent: #22C55E;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.card-bg {
+  background-color: var(--card-bg);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out forwards;
+  opacity: 0;
+}
+
+#back-to-top {
+  transition: opacity 0.3s, visibility 0.3s;
+}
