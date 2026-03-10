@@ -67,6 +67,7 @@ const Contact = () => {
               <ArrowUpRight className="w-4 h-4 text-slate-500 group-hover:text-indigo-400 transition-colors" />
             </a>
           </div>
+        </div>
       </div>
     </section>
   );
