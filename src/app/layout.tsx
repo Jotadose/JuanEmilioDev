@@ -1,40 +1,66 @@
-"use client";
-
-import { usePathname } from "next/navigation";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import StyledComponentsRegistry from "@/lib/registry";
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import BackToTopButton from "@/components/BackToTopButton";
-import BackgroundPattern from "@/components/BackgroundPattern";
+import ClientLayout from "@/components/ClientLayout";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://juanemiliodev.vercel.app"
+  ),
+  title: {
+    default: "Juan Elgueda | Full-Stack Developer",
+    template: "%s | Juan Elgueda",
+  },
+  description:
+    "Full-Stack Developer specializing in Next.js, TypeScript and PostgreSQL. Founder of Agendex, a SaaS booking platform for beauty salons. Available for new opportunities.",
+  keywords: [
+    "Full-Stack Developer",
+    "Next.js",
+    "TypeScript",
+    "React",
+    "PostgreSQL",
+    "SaaS",
+    "Agendex",
+  ],
+  authors: [{ name: "Juan Elgueda" }],
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    siteName: "Juan Elgueda",
+    title: "Juan Elgueda | Full-Stack Developer",
+    description:
+      "Full-Stack Developer specializing in Next.js, TypeScript and PostgreSQL. Founder of Agendex, a SaaS booking platform for beauty salons.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Juan Elgueda — Full-Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Juan Elgueda | Full-Stack Developer",
+    description: "Full-Stack Developer — Next.js · TypeScript · SaaS",
+    images: ["/og-image.png"],
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode; // Corregido: React.ReactNode en lugar de React.React-Node
+  children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const isHomePage = pathname === "/";
-
   return (
     <html lang="es" className="!scroll-smooth">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
-        <StyledComponentsRegistry>
-          {!isHomePage && <BackgroundPattern />}
-          <Header />
-          <main>{children}</main> {/* Main ya no tiene padding */}
-          <Footer />
-          <BackToTopButton />
-        </StyledComponentsRegistry>
+      <body className={`${inter.variable} antialiased`}>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

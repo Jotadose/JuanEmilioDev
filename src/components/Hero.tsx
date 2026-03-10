@@ -1,4 +1,4 @@
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, FileText } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -50,7 +50,7 @@ const Hero = () => {
         </p>
 
         <p
-          className="max-w-xl mx-auto text-slate-500 text-base mb-12 leading-relaxed animate-fade-in-up"
+          className="max-w-xl mx-auto text-slate-500 text-base mb-5 leading-relaxed animate-fade-in-up"
           style={{ animationDelay: "0.3s" }}
         >
           Founder of{" "}
@@ -58,6 +58,15 @@ const Hero = () => {
           booking platform for beauty salons. I design, build and operate
           production systems using TypeScript, React, Next.js and PostgreSQL.
         </p>
+
+        {/* Recruiter availability badge */}
+        <div
+          className="inline-flex items-center gap-2 bg-slate-800/60 border border-slate-700 rounded-full px-4 py-1.5 text-sm text-slate-400 mb-10 animate-fade-in-up"
+          style={{ animationDelay: "0.35s" }}
+        >
+          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+          Desarrollador Full Stack · Proyectos en producción · Disponible para nuevas oportunidades
+        </div>
 
         <div
           className="flex justify-center items-center gap-3 flex-wrap animate-fade-in-up"
@@ -90,6 +99,14 @@ const Hero = () => {
             className="inline-flex items-center gap-2 text-slate-400 font-medium py-3 px-4 rounded-lg hover:text-white transition-all duration-200"
           >
             <Mail className="w-4 h-4" /> Contact
+          </a>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-slate-400 font-medium py-3 px-4 rounded-lg hover:text-white transition-all duration-200"
+          >
+            <FileText className="w-4 h-4" /> Ver CV
           </a>
         </div>
       </div>
