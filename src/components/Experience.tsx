@@ -1,15 +1,16 @@
-const experiences = [
+﻿const experiences = [
   {
-    role: "Founder / Developer",
+    role: "Founder & Full-Stack Architect",
     company: "Agendex",
     period: "2024 — Present",
     description:
-      "Built and operate a production SaaS platform for salon management.",
+      "Diseño, desarrollo y operación en producción de plataforma SaaS multi-tenant para salones de belleza y consultas de salud con clientes reales.",
     bullets: [
-      "Designed the database architecture",
-      "Implemented scheduling and checkout modules",
-      "Maintain production infrastructure",
-      "Deploy continuous updates and bug fixes",
+      "Arquitectura multi-tenant con aislamiento estricto vía PostgreSQL RLS y subdominios dinámicos en Edge Middleware (Next.js 15)",
+      "Desarrollo del motor de agenda concurrente en tiempo real con prevención transaccional de colisiones y actualizaciones WebSockets",
+      "Optimización del rendimiento de renderizado en servidor (SSR) reduciendo round-trips en un 60% mediante deduplicación en memoria (React.cache())",
+      "Implementación del módulo financiero y POS: flujo completo de caja diaria, tickets multi-servicio (visits) y pagos con MercadoPago y Webpay",
+      "Generación y distribución multiplataforma nativa para iOS y Android utilizando Capacitor 7",
     ],
     isCurrent: true,
   },
@@ -18,7 +19,7 @@ const experiences = [
     company: "AIEP",
     period: "2023",
     description:
-      "Provided technical support for teachers and students and managed institutional Microsoft 365 accounts.",
+      "Soporte técnico integral para docentes y estudiantes, administración de infraestructura de laboratorio y gestión de cuentas institucionales Microsoft 365.",
     bullets: [],
     isCurrent: false,
   },
@@ -30,9 +31,9 @@ const Experience = () => {
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="mb-12">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-            Experience
+            Experiencia
           </h2>
-          <p className="text-slate-400">Building and shipping real systems.</p>
+          <p className="text-slate-400">Construcción y despliegue de sistemas en producción real.</p>
         </div>
         <div className="space-y-0">
           {experiences.map((exp, i) => (
@@ -57,23 +58,23 @@ const Experience = () => {
                   </span>
                   {exp.isCurrent && (
                     <span className="text-xs bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded-full">
-                      Current
+                      Actual
                     </span>
                   )}
                 </div>
                 <p className="text-slate-500 text-sm mb-3">{exp.period}</p>
-                <p className="text-slate-400 text-sm mb-3 leading-relaxed">
+                <p className="text-slate-400 text-sm mb-4 leading-relaxed">
                   {exp.description}
                 </p>
                 {exp.bullets.length > 0 && (
                   <ul className="space-y-2">
-                    {exp.bullets.map((b) => (
+                    {exp.bullets.map((b, bi) => (
                       <li
-                        key={b}
-                        className="flex items-start gap-2.5 text-slate-400 text-sm"
+                        key={bi}
+                        className="flex items-start gap-2.5 text-slate-300 text-xs sm:text-sm"
                       >
-                        <span className="w-1 h-1 rounded-full bg-indigo-500 flex-shrink-0 mt-2" />
-                        {b}
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-2" />
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>

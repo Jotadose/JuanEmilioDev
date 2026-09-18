@@ -1,4 +1,4 @@
-import { ArrowRight, Github, Linkedin, Mail, FileText } from "lucide-react";
+﻿import { ArrowRight, Github, Linkedin, Mail, FileText, Sparkles } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -24,48 +24,45 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-6 py-28 text-center max-w-4xl">
         {/* Currently Building badge */}
         <div
-          className="inline-flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-full px-4 py-1.5 text-sm text-slate-300 mb-10 animate-fade-in-up"
+          className="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700 rounded-full px-4 py-1.5 text-sm text-slate-300 mb-8 animate-fade-in-up shadow-sm"
           style={{ animationDelay: "0s" }}
         >
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
-          Currently Building — Agendex SaaS Platform
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+          <span className="font-medium text-white">Actualmente Creando:</span> Agendex SaaS Platform
         </div>
 
         <h1
           className="text-5xl md:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6 animate-fade-in-up"
           style={{ animationDelay: "0.1s" }}
         >
-          Full-Stack
+          Full-Stack &amp;
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-            Developer
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-violet-400">
+            SaaS Architect
           </span>
         </h1>
 
         <p
-          className="text-xl text-slate-300 mb-4 animate-fade-in-up"
+          className="text-lg md:text-xl text-slate-300 mb-4 max-w-2xl mx-auto font-normal leading-relaxed animate-fade-in-up"
           style={{ animationDelay: "0.2s" }}
         >
-          Building real SaaS products with modern web technologies
+          Diseño, construyo y opero productos web de alta concurrencia con arquitecturas multi-tenant en producción.
         </p>
 
         <p
-          className="max-w-xl mx-auto text-slate-500 text-base mb-5 leading-relaxed animate-fade-in-up"
+          className="max-w-xl mx-auto text-slate-400 text-sm md:text-base mb-6 leading-relaxed animate-fade-in-up"
           style={{ animationDelay: "0.3s" }}
         >
-          Founder of{" "}
-          <span className="text-indigo-400 font-medium">Agendex</span> — a SaaS
-          booking platform for beauty salons. I design, build and operate
-          production systems using TypeScript, React, Next.js and PostgreSQL.
+          Creador de <span className="text-indigo-400 font-semibold">Agendex</span> (Next.js 15, PostgreSQL RLS, WebSockets y Capacitor 7). Especializado en rendimiento en el Edge, bases de datos aisladas y experiencias de usuario ultra-fluidas.
         </p>
 
         {/* Recruiter availability badge */}
         <div
-          className="inline-flex items-center gap-2 bg-slate-800/60 border border-slate-700 rounded-full px-4 py-1.5 text-sm text-slate-400 mb-10 animate-fade-in-up"
+          className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 text-xs md:text-sm text-emerald-400 mb-10 animate-fade-in-up"
           style={{ animationDelay: "0.35s" }}
         >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
-          Desarrollador Full Stack · Proyectos en producción · Disponible para nuevas oportunidades
+          <Sparkles className="w-3.5 h-3.5" />
+          Disponible para roles Full-Stack / Frontend Senior y proyectos de alto impacto
         </div>
 
         <div
@@ -76,7 +73,7 @@ const Hero = () => {
             href="#projects"
             className="inline-flex items-center gap-2 bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-500 transition-all duration-200 shadow-lg shadow-indigo-600/25"
           >
-            View Projects <ArrowRight className="w-4 h-4" />
+            Ver Proyectos <ArrowRight className="w-4 h-4" />
           </a>
           <a
             href="https://github.com/Jotadose"
@@ -98,7 +95,7 @@ const Hero = () => {
             href="#contact"
             className="inline-flex items-center gap-2 text-slate-400 font-medium py-3 px-4 rounded-lg hover:text-white transition-all duration-200"
           >
-            <Mail className="w-4 h-4" /> Contact
+            <Mail className="w-4 h-4" /> Contacto
           </a>
           <a
             href="/cv.pdf"
