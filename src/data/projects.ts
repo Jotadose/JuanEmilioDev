@@ -57,6 +57,25 @@ export const featuredProject: Project = {
 
 export const otherProjects: Project[] = [
   {
+    slug: "rc-reformas",
+    title: "RC Reformas",
+    tagline: "Sitio corporativo en producción con estimador interactivo de presupuestos",
+    description:
+      "Plataforma comercial para empresa de remodelaciones con motor de cotización en tiempo real según m² y calidades, captura de leads multicanal y fallback automático a WhatsApp.",
+    features: [
+      "Estimador algorítmico de presupuestos según superficie, materiales y multiplicadores comerciales",
+      "Captura de leads resiliente con envío a Formspree y fallback automático a WhatsApp API",
+      "Arquitectura modular en Next.js 15 y React 19 optimizada para SEO (sitemap dinámico y meta tags)",
+      "Despliegue continuo en Vercel con cliente comercial real y soporte multicanal",
+    ],
+    stack: ["Next.js 15", "React 19", "TypeScript", "TailwindCSS 4", "Formspree", "WhatsApp API"],
+    liveUrl: "https://rcreformas.vercel.app",
+    githubUrl: "https://github.com/Jotadose/rcv2",
+    image: undefined,
+    brandColor: "#3B82F6",
+    isProduction: true,
+  },
+  {
     slug: "fivem-admin",
     title: "FiveM Admin Platform",
     tagline: "Dashboard de administración remota para servidor de roleplay",
@@ -87,21 +106,5 @@ export const otherProjects: Project[] = [
     githubUrl: undefined,
     image: undefined,
     brandColor: "#10B981",
-  },
-  {
-    slug: "pokedex",
-    title: "Pokédex Mobile App",
-    tagline: "Aplicación móvil multiplataforma con consumo reactivo de API",
-    description:
-      "Aplicación móvil híbrida para búsqueda, filtrado y exploración de estadísticas y movimientos consumiendo la PokéAPI oficial.",
-    features: [
-      "Búsqueda instantánea con debouncing y filtrado por tipos",
-      "Interfaz fluida optimizada para dispositivos móviles iOS y Android",
-      "Cache local de datos para navegación offline eficiente",
-    ],
-    stack: ["Ionic", "Angular", "TypeScript", "Capacitor"],
-    githubUrl: undefined,
-    image: undefined,
-    brandColor: "#EF4444",
   },
 ];

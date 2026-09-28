@@ -1,5 +1,5 @@
 ﻿import Image from "next/image";
-import { Github, ArrowUpRight, ShieldCheck, Zap, Smartphone } from "lucide-react";
+import { Github, ArrowUpRight, ShieldCheck, Zap, Smartphone, ExternalLink } from "lucide-react";
 import { featuredProject, otherProjects } from "@/data/projects";
 import ProjectPlaceholder from "@/components/ProjectPlaceholder";
 import AgendexPreview from "@/components/AgendexPreview";
@@ -21,8 +21,8 @@ const Portfolio = () => {
         </div>
 
         {/* Featured project (Agendex) */}
-        <div className="bg-slate-800/40 rounded-2xl border border-slate-700/80 overflow-hidden mb-12 hover:border-indigo-500/40 transition-all duration-300 shadow-xl">
-          {/* Interactive Agendex Preview (replaces placeholder) */}
+        <div className="bg-slate-800/40 rounded-2xl border border-slate-700/80 overflow-hidden mb-14 hover:border-indigo-500/40 transition-all duration-300 shadow-xl">
+          {/* Interactive Agendex Preview */}
           <AgendexPreview />
 
           <div className="p-6 sm:p-10">
@@ -123,9 +123,11 @@ const Portfolio = () => {
         </div>
 
         {/* Other projects header */}
-        <div className="mb-6">
-          <h3 className="text-xl font-bold text-white mb-1">Otros Proyectos</h3>
-          <p className="text-slate-400 text-sm">Desarrollo de herramientas y aplicaciones prácticas.</p>
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">Otros Proyectos en Producción &amp; Desarrollo</h3>
+            <p className="text-slate-400 text-sm">Aplicaciones comerciales reales y herramientas técnicas.</p>
+          </div>
         </div>
 
         {/* Other projects grid */}
@@ -133,7 +135,7 @@ const Portfolio = () => {
           {otherProjects.map((project) => (
             <div
               key={project.slug}
-              className="bg-slate-800/20 rounded-xl border border-slate-700/50 overflow-hidden hover:border-slate-600 transition-all duration-300 flex flex-col"
+              className="bg-slate-800/30 rounded-xl border border-slate-700/60 overflow-hidden hover:border-slate-500 transition-all duration-300 flex flex-col group shadow-lg"
             >
               {project.image ? (
                 <div className="relative w-full aspect-video">
@@ -144,34 +146,61 @@ const Portfolio = () => {
               )}
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-base font-semibold text-white">{project.title}</h3>
-                  {project.githubUrl && project.githubUrl !== "#" && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate-500 hover:text-slate-300 transition-colors flex-shrink-0"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  )}
+                  <div>
+                    {project.isProduction && (
+                      <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 inline-block mb-1">
+                        Cliente en Producción
+                      </span>
+                    )}
+                    <h3 className="text-base font-bold text-white group-hover:text-indigo-300 transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-400 hover:text-white transition-colors p-1"
+                        title="Ver Código en GitHub"
+                      >
+                        <Github className="w-4 h-4" />
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-400 hover:text-indigo-300 transition-colors p-1"
+                        title="Visitar Sitio en Vivo"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
                 </div>
+
                 <p className="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
                   {project.description}
                 </p>
+
                 <ul className="space-y-1.5 mb-4 flex-1">
                   {project.features.map((f) => (
-                    <li key={f} className="text-slate-400 text-xs flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-slate-500 flex-shrink-0 mt-1.5" />
+                    <li key={f} className="text-slate-300 text-xs flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full bg-indigo-400 flex-shrink-0 mt-1.5" />
                       {f}
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800">
+
+                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-700/60 mt-auto">
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-slate-700/50 text-slate-300 text-[11px] px-2 py-0.5 rounded border border-slate-700"
+                      className="bg-slate-800 text-slate-300 text-[11px] px-2.5 py-0.5 rounded border border-slate-700/80 font-medium"
                     >
                       {tech}
                     </span>
