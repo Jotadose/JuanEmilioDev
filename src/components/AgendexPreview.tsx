@@ -1,13 +1,50 @@
 ﻿"use client";
 
 import { useState } from "react";
-import { LayoutDashboard, Network, CheckCircle2, Clock, DollarSign, Users } from "lucide-react";
+import Image from "next/image";
+import { LayoutDashboard, Network, Image as ImageIcon, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+
+const realCaptures = [
+  {
+    src: "/images/agendex/shot_02.png",
+    title: "Landing Page Oficial",
+    description: "Propuesta de valor SaaS en agendex.studio: métricas de retención, -70% no-show y configuración en 5 min.",
+    tag: "Producción",
+  },
+  {
+    src: "/images/agendex/shot_01.png",
+    title: "Motor de Agenda & Despacho",
+    description: "Vista interactiva de agenda multi-profesional con estados en vivo y recordatorios automáticos por WhatsApp.",
+    tag: "Core SaaS",
+  },
+  {
+    src: "/images/agendex/shot_05.png",
+    title: "Especialización por Verticales",
+    description: "Configuración automatizada para barberías, estéticas y salones con comisiones y servicios específicos.",
+    tag: "Multi-Vertical",
+  },
+  {
+    src: "/images/agendex/shot_03.png",
+    title: "Flujo Integral de Clientes",
+    description: "Desde la reserva online sin fricción hasta el control de caja y cierre de mes.",
+    tag: "Finanzas & POS",
+  },
+];
 
 export default function AgendexPreview() {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "architecture">("dashboard");
+  const [activeTab, setActiveTab] = useState<"photos" | "architecture">("photos");
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? realCaptures.length - 1 : prev - 1));
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === realCaptures.length - 1 ? 0 : prev + 1));
+  };
 
   return (
-    <div className="w-full bg-slate-950/80 rounded-t-2xl border-b border-slate-700/60 overflow-hidden font-sans">
+    <div className="w-full bg-slate-950 rounded-t-2xl border-b border-slate-700/60 overflow-hidden font-sans">
       {/* Top Chrome / Window Controls */}
       <div className="px-4 py-2.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -17,22 +54,22 @@ export default function AgendexPreview() {
             <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
           </div>
           <span className="text-[11px] font-mono text-slate-400 ml-2 hidden sm:inline">
-            https://[tenant].agendex.studio/calendar
+            https://agendex.studio • Producción Real
           </span>
         </div>
 
         {/* Tab Toggle */}
         <div className="flex items-center gap-1 bg-slate-950 p-0.5 rounded-lg border border-slate-800 text-xs">
           <button
-            onClick={() => setActiveTab("dashboard")}
+            onClick={() => setActiveTab("photos")}
             className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition font-medium text-[11px] ${
-              activeTab === "dashboard"
+              activeTab === "photos"
                 ? "bg-indigo-600 text-white shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Dashboard</span> UI
+            <ImageIcon className="w-3.5 h-3.5" />
+            Capturas Reales ({currentSlide + 1}/{realCaptures.length})
           </button>
           <button
             onClick={() => setActiveTab("architecture")}
@@ -49,128 +86,64 @@ export default function AgendexPreview() {
       </div>
 
       {/* Main Content Area */}
-      {activeTab === "dashboard" ? (
-        <div className="p-4 sm:p-5 bg-gradient-to-b from-slate-900/60 to-slate-950/80">
-          {/* Header Stats Inside the Mockup */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white text-sm shadow-md shadow-indigo-600/30">
-                A
-              </div>
+      {activeTab === "photos" ? (
+        <div className="p-3 sm:p-5 bg-gradient-to-b from-slate-900/40 to-slate-950">
+          <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-slate-800 bg-slate-950 group">
+            <Image
+              src={realCaptures[currentSlide].src}
+              alt={realCaptures[currentSlide].title}
+              fill
+              className="object-cover object-top transition-transform duration-500"
+              priority
+            />
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none" />
+
+            {/* Slide Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              aria-label="Captura anterior"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/80 hover:bg-indigo-600 border border-slate-700 text-white flex items-center justify-center transition shadow-lg opacity-80 group-hover:opacity-100"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextSlide}
+              aria-label="Siguiente captura"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-slate-900/80 hover:bg-indigo-600 border border-slate-700 text-white flex items-center justify-center transition shadow-lg opacity-80 group-hover:opacity-100"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Caption on image */}
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2 p-3 sm:p-4 rounded-xl bg-slate-900/90 border border-slate-800 backdrop-blur-md">
               <div>
-                <div className="text-xs sm:text-sm font-semibold text-white flex items-center gap-2">
-                  Barbería Elite
-                  <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 font-mono">
-                    Multi-Tenant RLS
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 uppercase tracking-wider">
+                    {realCaptures[currentSlide].tag}
                   </span>
+                  <h4 className="text-xs sm:text-sm font-bold text-white">
+                    {realCaptures[currentSlide].title}
+                  </h4>
                 </div>
-                <div className="text-[11px] text-slate-400 flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1">
-                    <Users className="w-3 h-3 text-indigo-400" /> 3 Profesionales activos
-                  </span>
-                </div>
+                <p className="text-[11px] sm:text-xs text-slate-300 line-clamp-1 sm:line-clamp-none">
+                  {realCaptures[currentSlide].description}
+                </p>
               </div>
-            </div>
 
-            <div className="flex items-center gap-2 text-xs">
-              <div className="bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/60 text-slate-300 font-mono text-[11px]">
-                Hoy, 10:00 - 19:00
-              </div>
-              <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-md flex items-center gap-1 text-[11px] font-semibold">
-                <DollarSign className="w-3 h-3" /> Caja: $148.500
-              </div>
-            </div>
-          </div>
-
-          {/* 3 Columns Dispatcher Simulation */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-            {/* Column 1 */}
-            <div className="bg-slate-900/90 rounded-xl p-2.5 border border-slate-800 space-y-2">
-              <div className="flex items-center justify-between pb-1.5 border-b border-slate-800 text-xs">
-                <span className="font-semibold text-slate-200">Carlos M. (Barbero)</span>
-                <span className="text-[10px] text-indigo-400 font-mono bg-indigo-500/10 px-1.5 py-0.5 rounded">
-                  4 citas
-                </span>
-              </div>
-              <div className="space-y-1.5">
-                <div className="p-2 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-xs">
-                  <div className="flex items-center justify-between text-indigo-300 font-medium text-[11px]">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> 10:00 - 10:45
-                    </span>
-                    <span className="text-[10px] text-emerald-400 flex items-center gap-0.5">
-                      <CheckCircle2 className="w-2.5 h-2.5" /> Confirmada
-                    </span>
-                  </div>
-                  <div className="text-white font-medium text-[11px] mt-0.5">Corte Fade + Barba</div>
-                  <div className="text-[10px] text-slate-400">Cliente: Felipe R. • $18.000</div>
-                </div>
-
-                <div className="p-2 rounded-lg bg-slate-800/60 border border-slate-700/60 text-xs">
-                  <div className="flex items-center justify-between text-slate-300 font-medium text-[11px]">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> 11:30 - 12:15
-                    </span>
-                    <span className="text-[10px] text-indigo-400">Webpay</span>
-                  </div>
-                  <div className="text-white font-medium text-[11px] mt-0.5">Corte Clásico</div>
-                  <div className="text-[10px] text-slate-400">Cliente: Lucas M. • Pagado</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 2 */}
-            <div className="bg-slate-900/90 rounded-xl p-2.5 border border-slate-800 space-y-2">
-              <div className="flex items-center justify-between pb-1.5 border-b border-slate-800 text-xs">
-                <span className="font-semibold text-slate-200">Esteban T. (Estilista)</span>
-                <span className="text-[10px] text-indigo-400 font-mono bg-indigo-500/10 px-1.5 py-0.5 rounded">
-                  3 citas
-                </span>
-              </div>
-              <div className="space-y-1.5">
-                <div className="p-2 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-xs">
-                  <div className="flex items-center justify-between text-indigo-300 font-medium text-[11px]">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> 10:30 - 11:15
-                    </span>
-                    <span className="text-[10px] text-amber-400">En Atención</span>
-                  </div>
-                  <div className="text-white font-medium text-[11px] mt-0.5">Perfilado + Lavado</div>
-                  <div className="text-[10px] text-slate-400">Cliente: Andrés G. • En sillón</div>
-                </div>
-
-                <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs">
-                  <div className="text-amber-300 font-medium text-[11px] flex items-center gap-1">
-                    <Clock className="w-3 h-3" /> 13:00 - 14:00 • Bloqueo Colación
-                  </div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">No disponible para reservas web</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 3 */}
-            <div className="bg-slate-900/90 rounded-xl p-2.5 border border-slate-800 space-y-2">
-              <div className="flex items-center justify-between pb-1.5 border-b border-slate-800 text-xs">
-                <span className="font-semibold text-slate-200">Matías V. (Colorista)</span>
-                <span className="text-[10px] text-indigo-400 font-mono bg-indigo-500/10 px-1.5 py-0.5 rounded">
-                  2 citas
-                </span>
-              </div>
-              <div className="space-y-1.5">
-                <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-xs">
-                  <div className="flex items-center justify-between text-emerald-300 font-medium text-[11px]">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> 11:00 - 12:30
-                    </span>
-                    <span className="text-[10px] text-emerald-400">Visita sábado</span>
-                  </div>
-                  <div className="text-white font-medium text-[11px] mt-0.5">Decoloración + Matiz</div>
-                  <div className="text-[10px] text-slate-400">Cliente: Camila B. • $45.000</div>
-                </div>
-
-                <div className="p-3 rounded-lg border border-dashed border-slate-800 text-center text-slate-500 text-[11px]">
-                  + Espacio libre para reservas públicas
-                </div>
+              {/* Dots */}
+              <div className="flex items-center gap-1.5 self-center sm:self-end">
+                {realCaptures.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      idx === currentSlide ? "w-6 bg-indigo-500" : "w-1.5 bg-slate-700"
+                    }`}
+                    aria-label={`Ir a captura ${idx + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -179,7 +152,7 @@ export default function AgendexPreview() {
         /* Architecture Tab */
         <div className="p-4 sm:p-6 bg-slate-950 space-y-4">
           <div className="text-xs font-semibold text-indigo-400 uppercase tracking-wider">
-            Arquitectura de Aislamiento & SSR en Tiempo Real
+            Arquitectura de Aislamiento &amp; SSR en Tiempo Real
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center text-xs">
