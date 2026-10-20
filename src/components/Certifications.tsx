@@ -1,5 +1,5 @@
-﻿import Image from "next/image";
-import { Award, CheckCircle, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { Award, CheckCircle, ExternalLink, FileText } from "lucide-react";
 import { certifications } from "@/data/certifications";
 
 export default function Certifications() {
@@ -13,8 +13,8 @@ export default function Certifications() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
             Certificaciones
           </h2>
-          <p className="text-slate-400">
-            Acreditaciones internacionales emitidas por Cisco y el Python Institute respaldadas en Credly.
+          <p className="text-slate-400 text-sm">
+            Acreditaciones internacionales emitidas por Cisco Networking Academy y el Python Institute, verificables en Credly.
           </p>
         </div>
 
@@ -56,15 +56,26 @@ export default function Certifications() {
                   ))}
                 </div>
 
-                <div className="mt-auto">
+                <div className="mt-auto flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-2 border-t border-slate-800/80">
                   <a
                     href={cert.verificationUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-emerald-600/20 hover:border-emerald-500/40 border border-slate-700 px-3 py-1.5 rounded-lg transition-all"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-200 hover:text-white bg-slate-800 hover:bg-emerald-600/20 hover:border-emerald-500/40 border border-slate-700 px-3 py-1.5 rounded-lg transition-all"
                   >
                     Verificar en Credly <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
                   </a>
+
+                  {cert.pdfUrl && (
+                    <a
+                      href={cert.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-slate-800 px-2.5 py-1.5 rounded-lg transition-all"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-indigo-400" /> Certificado PDF
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

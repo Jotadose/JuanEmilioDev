@@ -1,4 +1,4 @@
-﻿export interface Project {
+export interface Project {
   slug: string;
   title: string;
   tagline: string;
@@ -13,23 +13,24 @@
   brandColor: string;
   isFeatured?: boolean;
   isProduction?: boolean;
+  statusBadge?: string;
   metrics?: { label: string; value: string }[];
 }
 
 export const featuredProject: Project = {
   slug: "agendex",
   title: "Agendex",
-  tagline: "Plataforma SaaS Multi-Tenant & POS para Salones y Salud",
+  tagline: "Plataforma SaaS Multi-Tenant & POS para Salones y Centros de Servicios",
   description:
     "SaaS multi-tenant en producción con subdominios dinámicos ([slug].agendex.studio). Diseñado con arquitectura de aislamiento estricto vía PostgreSQL RLS, motor de calendario en tiempo real, prevención de colisiones de citas, módulo POS y sincronización móvil nativa.",
   features: [
-    "Aislamiento estricto multi-tenant con Row Level Security (RLS) en PostgreSQL (cero fugas entre negocios)",
-    "Reescritura de subdominios y validación de sesión en el Edge (Next.js 15 Middleware)",
-    "Motor de agenda concurrente para múltiples profesionales con sincronización vía WebSockets",
-    "Optimización SSR paralela con React.cache(), reduciendo las consultas iniciales en un 60%",
-    "Módulo financiero y POS: Sesiones de caja, checkout multi-servicio (visits) y desglose de comisiones",
-    "Integración con pasarelas de pago (MercadoPago y Webpay) y notificaciones push con Firebase FCM",
-    "Distribución nativa para iOS y Android generada desde una sola base de código con Capacitor 7",
+    "Aislamiento estricto multi-tenant con Row Level Security (RLS) en PostgreSQL (cero fugas de datos entre organizaciones)",
+    "Reescritura de subdominios y validación de sesión en el Edge mediante Next.js 15 Middleware",
+    "Motor de agenda concurrente para múltiples profesionales con sincronización en tiempo real",
+    "Optimización SSR paralela con React.cache(), reduciendo las consultas iniciales a base de datos en un 60%",
+    "Módulo financiero y POS: Sesiones de caja, checkout multi-servicio (visits) y desglose de comisiones por profesional",
+    "Integración con pasarelas de pago (Mercado Pago y Webpay) y notificaciones automáticas por WhatsApp / push",
+    "Distribución nativa para iOS y Android compilada desde una sola base de código con Capacitor 7",
   ],
   stack: [
     "Next.js 15",
@@ -39,7 +40,7 @@ export const featuredProject: Project = {
     "PostgreSQL RLS",
     "Capacitor 7",
     "TailwindCSS",
-    "MercadoPago",
+    "Mercado Pago",
     "Webpay",
   ],
   liveUrl: "https://agendex.studio",
@@ -57,16 +58,16 @@ export const featuredProject: Project = {
 
 export const otherProjects: Project[] = [
   {
-    slug: "rc-reformas",
+    slug: "rcreformas",
     title: "RC Reformas",
     tagline: "Sitio corporativo en producción con estimador interactivo de presupuestos",
     description:
       "Plataforma comercial para empresa de remodelaciones con motor de cotización en tiempo real según m² y calidades, captura de leads multicanal y fallback automático a WhatsApp.",
     features: [
-      "Estimador algorítmico de presupuestos según superficie, materiales y multiplicadores comerciales",
-      "Captura de leads resiliente con envío a Formspree y fallback automático a WhatsApp API",
-      "Arquitectura modular en Next.js 15 y React 19 optimizada para SEO (sitemap dinámico y meta tags)",
-      "Despliegue continuo en Vercel con cliente comercial real y soporte multicanal",
+      "Estimador algorítmico de presupuestos según superficie, materiales seleccionados y multiplicadores comerciales",
+      "Captura de prospectos resiliente: envío de formulario a Formspree con fallback automático a WhatsApp API",
+      "Arquitectura modular en Next.js 15 y React 19 optimizada para SEO (sitemap dinámico, schema org y OpenGraph)",
+      "Despliegue continuo en Vercel con cliente comercial activo y dominio corporativo propio",
     ],
     stack: ["Next.js 15", "React 19", "TypeScript", "TailwindCSS 4", "Formspree", "WhatsApp API"],
     liveUrl: "https://rcreformas.vercel.app",
@@ -76,35 +77,23 @@ export const otherProjects: Project[] = [
     isProduction: true,
   },
   {
-    slug: "fivem-admin",
-    title: "FiveM Admin Platform",
-    tagline: "Dashboard de administración remota para servidor de roleplay",
+    slug: "joyas-erem",
+    title: "Joyas Erem",
+    tagline: "E-Commerce Integral con Checkout Mercado Pago y Panel Administrativo",
     description:
-      "Panel web interactivo para gestionar remotamente la base de datos de usuarios, inventarios y permisos en un servidor FiveM.",
+      "Plataforma de comercio electrónico con arquitectura moderna en Next.js 16 y Supabase. Cuenta con integración completa de pagos vía Mercado Pago SDK, reconciliación automática por webhooks, gestión de stock por variantes y panel de administración.",
     features: [
-      "Construido con React, TypeScript y TailwindCSS",
-      "Operaciones remotas de base de datos seguras desde cualquier dispositivo",
-      "Monitoreo de estado de jugadores en tiempo real",
+      "Pasarela de pago Mercado Pago integrada de extremo a extremo: Preferences API, webhooks IPN y reconciliación de órdenes",
+      "Seguridad de datos y sesiones de usuario con SSR cookies y políticas RLS sobre PostgreSQL",
+      "Panel de administración privado (/admin): control de pedidos en tiempo real, cambio de estados y sincronización de pagos",
+      "Gestor de catálogo dinámico: creación de productos con múltiples variantes (talla, metal, piedras) y subida de imágenes a Supabase Storage",
+      "Carrito de compras reactivo con persistencia local, validación de inventario y optimización SEO integral",
     ],
-    stack: ["React", "TypeScript", "TailwindCSS"],
-    githubUrl: undefined,
+    stack: ["Next.js 16", "React 19", "TypeScript", "Mercado Pago SDK", "Supabase", "PostgreSQL", "TailwindCSS 4"],
+    githubUrl: "https://github.com/Jotadose/joyas-erem",
     image: undefined,
     brandColor: "#F59E0B",
-  },
-  {
-    slug: "inventory-system",
-    title: "Inventory System",
-    tagline: "Sistema empresarial de gestión de inventario y stock",
-    description:
-      "Sistema backend y web de control de inventario con gestión de movimientos, auditoría de stock y catálogo de proveedores.",
-    features: [
-      "Arquitectura dirigida por base de datos relacional con MySQL",
-      "API REST modular desarrollada en Python (Flask)",
-      "Historial de transacciones y cálculo automático de existencias mínimas",
-    ],
-    stack: ["Python", "Flask", "MySQL", "REST APIs"],
-    githubUrl: undefined,
-    image: undefined,
-    brandColor: "#10B981",
+    isProduction: true,
+    statusBadge: "E-Commerce & Pagos",
   },
 ];

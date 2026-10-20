@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import { Github, ArrowUpRight, ShieldCheck, Zap, Smartphone, ExternalLink } from "lucide-react";
 import { featuredProject, otherProjects } from "@/data/projects";
 import ProjectPlaceholder from "@/components/ProjectPlaceholder";
@@ -15,8 +15,8 @@ const Portfolio = () => {
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
             Proyectos Destacados
           </h2>
-          <p className="text-slate-400">
-            Sistemas reales construidos para resolver problemas de escala, concurrencia y negocio.
+          <p className="text-slate-400 text-sm sm:text-base">
+            Sistemas reales construidos para resolver problemas de escala, concurrencia, pagos y negocio.
           </p>
         </div>
 
@@ -29,7 +29,7 @@ const Portfolio = () => {
             <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
               <div>
                 <span className="text-xs font-semibold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
-                  Proyecto Estrella • En Producción
+                  Proyecto Principal • En Producción
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white mt-2">
                   {featuredProject.title}
@@ -97,7 +97,7 @@ const Portfolio = () => {
 
             <div className="mb-6">
               <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-                Decisiones de Ingeniería & Características Clave:
+                Decisiones de Ingeniería &amp; Características Clave:
               </h4>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {featuredProject.features.map((f) => (
@@ -123,19 +123,23 @@ const Portfolio = () => {
         </div>
 
         {/* Other projects header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-8 flex items-center justify-between">
           <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">Otros Proyectos en Producción &amp; Desarrollo</h3>
-            <p className="text-slate-400 text-sm">Aplicaciones comerciales reales y herramientas técnicas.</p>
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">
+              Otros Proyectos en Producción &amp; Desarrollo
+            </h3>
+            <p className="text-slate-400 text-sm">
+              Plataformas comerciales reales con foco en negocio, pasarelas de pago y conversión.
+            </p>
           </div>
         </div>
 
-        {/* Other projects grid */}
-        <div className="grid md:grid-cols-3 gap-5">
+        {/* Other projects grid (2 robust cards) */}
+        <div className="grid md:grid-cols-2 gap-6">
           {otherProjects.map((project) => (
             <div
               key={project.slug}
-              className="bg-slate-800/30 rounded-xl border border-slate-700/60 overflow-hidden hover:border-slate-500 transition-all duration-300 flex flex-col group shadow-lg"
+              className="bg-slate-800/30 rounded-2xl border border-slate-700/60 overflow-hidden hover:border-slate-500 transition-all duration-300 flex flex-col group shadow-lg"
             >
               {project.image ? (
                 <div className="relative w-full aspect-video">
@@ -145,16 +149,19 @@ const Portfolio = () => {
                 <ProjectPlaceholder title={project.title} brandColor={project.brandColor} />
               )}
               <div className="p-6 flex flex-col flex-1">
-                <div className="flex justify-between items-start mb-2">
+                <div className="flex justify-between items-start mb-2.5">
                   <div>
                     {project.isProduction && (
-                      <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 inline-block mb-1">
-                        Cliente en Producción
+                      <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 inline-block mb-1.5">
+                        {project.statusBadge || "Cliente en Producción"}
                       </span>
                     )}
-                    <h3 className="text-base font-bold text-white group-hover:text-indigo-300 transition-colors">
+                    <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
                       {project.title}
                     </h3>
+                    <p className="text-xs text-indigo-400 font-medium mt-0.5">
+                      {project.tagline}
+                    </p>
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -163,7 +170,7 @@ const Portfolio = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-white transition-colors p-1"
+                        className="text-slate-400 hover:text-white transition-colors p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700"
                         title="Ver Código en GitHub"
                       >
                         <Github className="w-4 h-4" />
@@ -174,7 +181,7 @@ const Portfolio = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-indigo-400 hover:text-indigo-300 transition-colors p-1"
+                        className="text-indigo-400 hover:text-indigo-300 transition-colors p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700"
                         title="Visitar Sitio en Vivo"
                       >
                         <ExternalLink className="w-4 h-4" />
@@ -183,15 +190,15 @@ const Portfolio = () => {
                   </div>
                 </div>
 
-                <p className="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                <p className="text-slate-300 text-xs sm:text-sm mb-4 leading-relaxed">
                   {project.description}
                 </p>
 
-                <ul className="space-y-1.5 mb-4 flex-1">
+                <ul className="space-y-1.5 mb-5 flex-1">
                   {project.features.map((f) => (
                     <li key={f} className="text-slate-300 text-xs flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-indigo-400 flex-shrink-0 mt-1.5" />
-                      {f}
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0 mt-1.5" />
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -200,7 +207,7 @@ const Portfolio = () => {
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-slate-800 text-slate-300 text-[11px] px-2.5 py-0.5 rounded border border-slate-700/80 font-medium"
+                      className="bg-slate-900 text-slate-300 text-[11px] px-2.5 py-0.5 rounded border border-slate-800 font-medium"
                     >
                       {tech}
                     </span>
